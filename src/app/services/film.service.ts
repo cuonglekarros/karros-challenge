@@ -3,7 +3,6 @@ import {Banner} from "../models/banner";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable, of, throwError} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
-import {Tile} from "../components/gridfilm/gridfilm.component";
 import {Movie} from "../models/movie";
 
 @Injectable({
@@ -46,8 +45,8 @@ export class FilmService {
           movies.push(movie);
         })
       });
+      return of(movies);
     }
-    return of(movies);
   }
 
   private getNowPlayingMovies(): Observable<any> {
