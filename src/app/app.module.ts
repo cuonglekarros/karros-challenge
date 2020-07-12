@@ -8,19 +8,23 @@ import { BannerComponent } from './banner/banner.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatGridListModule} from "@angular/material/grid-list";
 import { GridfilmComponent } from './gridfilm/gridfilm.component';
+import { TabfilmComponent } from './tabfilm/tabfilm.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
     AppComponent,
     BannerComponent,
-    GridfilmComponent
+    GridfilmComponent,
+    TabfilmComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     NoopAnimationsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

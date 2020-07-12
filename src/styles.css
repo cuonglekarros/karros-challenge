@@ -3,3 +3,17 @@ body {
   margin: 0;
   font-family: Helvetica, sans-serif;
 }
+
+app-tabfilm .mat-tab-label {
+  color: darkgrey;
+  font-weight: bold;
+}
+
+app-tabfilm .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #ff0079;
+}
+
+app-tabfilm .mat-tab-label.mat-tab-label-active {
+  color: #ff0079;
+  font-weight: bold;
+}
