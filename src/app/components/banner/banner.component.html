@@ -1,7 +1,7 @@
-<ngb-carousel *ngIf="images" interval="2000" pauseOnHover=true>
+<ngb-carousel interval="3000" pauseOnHover=true>
   <ng-template ngbSlide>
     <div class="picsum-img-wrapper">
-      <img [src]="images[0]" alt="Random first slide">
+      <img src="{{banners[0].posterUrl}}" alt="Random first slide">
     </div>
     <div class="carousel-caption">
       <h3>{{banners[0].title}}</h3>
@@ -10,7 +10,7 @@
   </ng-template>
   <ng-template ngbSlide>
     <div class="picsum-img-wrapper">
-      <img [src]="images[1]" alt="Random second slide">
+      <img src="{{banners[1].posterUrl}}" alt="Random second slide">
     </div>
     <div class="carousel-caption">
       <h3>{{banners[1].title}}</h3>
@@ -19,11 +19,38 @@
   </ng-template>
   <ng-template ngbSlide>
     <div class="picsum-img-wrapper">
-      <img [src]="images[2]" alt="Random third slide">
+      <img src="{{banners[2].posterUrl}}" alt="Random third slide">
     </div>
     <div class="carousel-caption">
       <h3>{{banners[2].title}}</h3>
       <p>{{banners[2].description}}</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img src="{{banners[3].posterUrl}}" alt="Random fourth slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>{{banners[3].title}}</h3>
+      <p>{{banners[3].description}}</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img src="{{banners[4].posterUrl}}" alt="Random fifth slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>{{banners[4].title}}</h3>
+      <p>{{banners[4].description}}</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img src="{{banners[5].posterUrl}}" alt="Random six slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>{{banners[5].title}}</h3>
+      <p>{{banners[5].description}}</p>
     </div>
   </ng-template>
 </ngb-carousel>

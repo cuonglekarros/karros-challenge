@@ -10,6 +10,7 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import { GridfilmComponent } from './components/gridfilm/gridfilm.component';
 import { TabfilmComponent } from './components/tabfilm/tabfilm.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatTabsModule} from "@angular/material/tabs";
     NgbModule,
     NoopAnimationsModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
