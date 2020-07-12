@@ -45,8 +45,8 @@ export class FilmService {
           movies.push(movie);
         })
       });
-      return of(movies);
     }
+    return of(movies);
   }
 
   private getNowPlayingMovies(): Observable<any> {
