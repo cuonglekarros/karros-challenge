@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {Banner} from "../models/banner";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable, of, throwError} from "rxjs";
-import {catchError, map, tap} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {Movie} from "../models/movie";
+import {CONSTANT} from "../core/constant";
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class FilmService {
 
   getMovies(type: String): Observable<Movie[]> {
     let movies: Movie[] = [];
-    if(type === "POPULAR") {
+    if(type === CONSTANT.MOVIE_TYPE_POPULAR) {
       this.getPopularMovies().subscribe(data => {
         data.results.forEach(function (item) {
           let imgUrl = "https://image.tmdb.org/t/p/original";
@@ -48,7 +49,7 @@ export class FilmService {
         })
       });
     }
-    if(type === "TOP_RATED") {
+    if(type === CONSTANT.MOVIE_TYPE_TOP_RATED) {
       this.getTopRatedMovies().subscribe(data => {
         data.results.forEach(function (item) {
           let imgUrl = "https://image.tmdb.org/t/p/original";
@@ -62,7 +63,7 @@ export class FilmService {
         })
       });
     }
-    if(type === "UPCOMING") {
+    if(type === CONSTANT.MOVIE_TYPE_UPCOMING) {
       this.getUpcomingMovies().subscribe(data => {
         data.results.forEach(function (item) {
           let imgUrl = "https://image.tmdb.org/t/p/original";

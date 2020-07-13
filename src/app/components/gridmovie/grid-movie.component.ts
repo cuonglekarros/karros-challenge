@@ -1,5 +1,4 @@
-import {Component, Injectable, Input, OnInit} from '@angular/core';
-import {FilmService} from "../../services/film.service";
+import {Component, Input, OnInit} from '@angular/core';
 import {Movie} from "../../models/movie";
 
 @Component({
@@ -10,18 +9,9 @@ import {Movie} from "../../models/movie";
 
 export class GridMovieComponent implements OnInit {
 
-  @Input() movieType: String = "POPULAR";
-  movies: Movie[] = [];
-
-  constructor(private filmService: FilmService) {
-  }
+  @Input() movies: Movie[] = [];
 
   ngOnInit(): void {
     console.log("onInit called")
-    this.getMoviesByType(this.movieType);
-  }
-
-  getMoviesByType(type: String) {
-    this.filmService.getMovies(type).subscribe(movies => this.movies = movies)
   }
 }
