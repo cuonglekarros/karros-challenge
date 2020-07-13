@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TabfilmComponent } from './tabfilm.component';
+import { GridMovieComponent } from './grid-movie.component';
 
-describe('TabfilmComponent', () => {
-  let component: TabfilmComponent;
-  let fixture: ComponentFixture<TabfilmComponent>;
+describe('GridfilmComponent', () => {
+  let component: GridMovieComponent;
+  let fixture: ComponentFixture<GridMovieComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TabfilmComponent ]
+      declarations: [ GridMovieComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TabfilmComponent);
+    fixture = TestBed.createComponent(GridMovieComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

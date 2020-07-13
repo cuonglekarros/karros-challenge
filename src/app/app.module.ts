@@ -7,17 +7,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BannerComponent } from './components/banner/banner.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatGridListModule} from "@angular/material/grid-list";
-import { GridfilmComponent } from './components/gridfilm/gridfilm.component';
-import { TabfilmComponent } from './components/tabfilm/tabfilm.component';
+import { GridMovieComponent } from './components/gridmovie/grid-movie.component';
+import { TabMovieComponent } from './components/tabmovie/tab-movie.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {HttpClientModule} from "@angular/common/http";
+import {MatIconModule} from "@angular/material/icon";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
     AppComponent,
     BannerComponent,
-    GridfilmComponent,
-    TabfilmComponent
+    GridMovieComponent,
+    TabMovieComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,9 @@ import {HttpClientModule} from "@angular/common/http";
     NoopAnimationsModule,
     MatGridListModule,
     MatTabsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

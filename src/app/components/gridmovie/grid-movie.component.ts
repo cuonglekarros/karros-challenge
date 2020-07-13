@@ -4,14 +4,14 @@ import {Movie} from "../../models/movie";
 
 @Component({
   selector: 'app-gridfilm',
-  templateUrl: './gridfilm.component.html',
-  styleUrls: ['./gridfilm.component.css']
+  templateUrl: './grid-movie.component.html',
+  styleUrls: ['./grid-movie.component.css']
 })
 
 @Injectable({
   providedIn: 'root'
 })
-export class GridfilmComponent implements OnInit {
+export class GridMovieComponent implements OnInit {
 
   movies: Movie[] = [];
 
@@ -19,7 +19,8 @@ export class GridfilmComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getMoviesByType("POPULAR");
+    console.log("onInit called")
+    this.getMoviesByType("TOP_RATED");
   }
 
   getMoviesByType(type: String) {
