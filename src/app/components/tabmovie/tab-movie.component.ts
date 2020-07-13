@@ -1,22 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {GridMovieComponent} from "../gridmovie/grid-movie.component";
 
 @Component({
-  selector: 'app-tabfilm',
+  selector: 'app-tab-movie',
   templateUrl: './tab-movie.component.html',
   styleUrls: ['./tab-movie.component.css']
 })
 export class TabMovieComponent implements OnInit {
 
-  constructor(private gridfilmComponent: GridMovieComponent) {
+  constructor() {
   }
 
   ngOnInit(): void {
   }
 
-
   onClick($event: number) {
     console.log($event.toLocaleString())
-    this.gridfilmComponent.getMoviesByType("UPCOMING")
   }
 }

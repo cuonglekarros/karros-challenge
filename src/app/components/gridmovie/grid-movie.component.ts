@@ -1,18 +1,16 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {FilmService} from "../../services/film.service";
 import {Movie} from "../../models/movie";
 
 @Component({
-  selector: 'app-gridfilm',
+  selector: 'app-grid-movie',
   templateUrl: './grid-movie.component.html',
   styleUrls: ['./grid-movie.component.css']
 })
 
-@Injectable({
-  providedIn: 'root'
-})
 export class GridMovieComponent implements OnInit {
 
+  @Input() movieType: String = "POPULAR";
   movies: Movie[] = [];
 
   constructor(private filmService: FilmService) {
@@ -20,7 +18,7 @@ export class GridMovieComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("onInit called")
-    this.getMoviesByType("TOP_RATED");
+    this.getMoviesByType(this.movieType);
   }
 
   getMoviesByType(type: String) {
