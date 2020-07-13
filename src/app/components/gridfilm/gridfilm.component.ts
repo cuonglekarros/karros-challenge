@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {FilmService} from "../../services/film.service";
 import {Movie} from "../../models/movie";
 
@@ -6,6 +6,10 @@ import {Movie} from "../../models/movie";
   selector: 'app-gridfilm',
   templateUrl: './gridfilm.component.html',
   styleUrls: ['./gridfilm.component.css']
+})
+
+@Injectable({
+  providedIn: 'root'
 })
 export class GridfilmComponent implements OnInit {
 
@@ -15,6 +19,10 @@ export class GridfilmComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filmService.getMovies("POPULAR").subscribe(movies => this.movies = movies)
+    this.getMoviesByType("POPULAR");
+  }
+
+  getMoviesByType(type: String) {
+    this.filmService.getMovies(type).subscribe(movies => this.movies = movies)
   }
 }

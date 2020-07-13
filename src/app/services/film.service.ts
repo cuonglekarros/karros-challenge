@@ -11,6 +11,8 @@ import {Movie} from "../models/movie";
 export class FilmService {
   private nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=a7b3c9975791294647265c71224a88ad&language=en-US&page=1";
   private popularUrl = "https://api.themoviedb.org/3/movie/popular?api_key=a7b3c9975791294647265c71224a88ad&language=en-US&page=1";
+  private topRatedUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key=a7b3c9975791294647265c71224a88ad&language=en-US&page=1";
+  private upcomingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=a7b3c9975791294647265c71224a88ad&language=en-US&page=1";
   constructor(private httpClient: HttpClient) {
   }
 
@@ -46,6 +48,34 @@ export class FilmService {
         })
       });
     }
+    if(type === "TOP_RATED") {
+      this.getTopRatedMovies().subscribe(data => {
+        data.results.forEach(function (item) {
+          let imgUrl = "https://image.tmdb.org/t/p/original";
+          let movie: Movie = {
+            title: item.title,
+            overview: item.overview,
+            poster_path: imgUrl + item.poster_path,
+            vote_average: item.vote_average,
+          }
+          movies.push(movie);
+        })
+      });
+    }
+    if(type === "UPCOMING") {
+      this.getUpcomingMovies().subscribe(data => {
+        data.results.forEach(function (item) {
+          let imgUrl = "https://image.tmdb.org/t/p/original";
+          let movie: Movie = {
+            title: item.title,
+            overview: item.overview,
+            poster_path: imgUrl + item.poster_path,
+            vote_average: item.vote_average,
+          }
+          movies.push(movie);
+        })
+      });
+    }
     return of(movies);
   }
 
@@ -60,6 +90,19 @@ export class FilmService {
       map(this.extractData),
       catchError(this.handleError));
   }
+
+  private getTopRatedMovies(): Observable<any> {
+    return this.httpClient.get<any>(this.topRatedUrl).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
+  private getUpcomingMovies(): Observable<any> {
+    return this.httpClient.get<any>(this.upcomingUrl).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }
+
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
