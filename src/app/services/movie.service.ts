@@ -10,13 +10,13 @@ import {FormatString} from "../utils/StringUtils";
 @Injectable({
   providedIn: 'root'
 })
-export class FilmService {
+export class MovieService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getBanners(): Observable<Banner[]> {
+  getBanners(): Banner[] {
     let banners: Banner[] = [];
-    let requestURL: string = this.buildRequestUrl(CONSTANT.MOVIE_TYPE_NOW_PLAYING);
+    let requestURL: string = this.buildRequestMovieUrl(CONSTANT.MOVIE_TYPE_NOW_PLAYING);
     this.callRestRequestGetMovies(requestURL).subscribe(data => {
       data.results.forEach(function (item) {
         let banner: Banner = {
@@ -27,12 +27,12 @@ export class FilmService {
         banners.push(banner)
       })
     });
-    return of(banners);
+    return banners;
   }
 
-  getMovies(type: string): Observable<Movie[]> {
+  getMovies(type: string): Movie[] {
     let movies: Movie[] = [];
-    let requestURL: string = this.buildRequestUrl(type);
+    let requestURL: string = this.buildRequestMovieUrl(type);
     this.callRestRequestGetMovies(requestURL).subscribe(data => {
       data.results.forEach(function (item) {
         if (item.title.length > 15) {
@@ -47,7 +47,7 @@ export class FilmService {
         movies.push(movie);
       })
     });
-    return of(movies);
+    return movies;
   }
 
   private callRestRequestGetMovies(url: string): Observable<any> {
@@ -73,7 +73,7 @@ export class FilmService {
     return body || {};
   }
 
-  private buildRequestUrl(movieType: string): string {
-    return FormatString(CONSTANT.BASE_URL, movieType, CONSTANT.API_KEY);
+  private buildRequestMovieUrl(movieType: string): string {
+    return FormatString(CONSTANT.MOVIE_BASE_URL, movieType, CONSTANT.API_KEY);
   }
 }

@@ -12,6 +12,6 @@ export class GridMovieComponent implements OnInit {
   @Input() movies: Movie[] = [];
 
   ngOnInit(): void {
-    console.log("onInit called")
+    console.log("grid movie - onInit called")
   }
 }

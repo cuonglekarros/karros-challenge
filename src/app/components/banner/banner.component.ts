@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Banner} from "../../models/banner";
-import {FilmService} from "../../services/film.service";
+import {MovieService} from "../../services/movie.service";
 
 @Component({
   selector: 'app-banner',
@@ -11,11 +11,11 @@ export class BannerComponent implements OnInit {
 
   banners: Banner[];
 
-  constructor(private filmService: FilmService) {
+  constructor(private filmService: MovieService) {
 
   }
 
   ngOnInit(): void {
-    this.filmService.getBanners().subscribe(banners => this.banners = banners);
+    this.banners =this.filmService.getBanners();
   }
 }
