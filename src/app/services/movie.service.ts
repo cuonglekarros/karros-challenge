@@ -1,17 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Banner} from "../models/banner";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Observable, of, throwError} from "rxjs";
-import {catchError, map} from "rxjs/operators";
+import {Observable} from "rxjs";
 import {Movie} from "../models/movie";
 import {CONSTANT} from "../core/constant";
 import {FormatString} from "../utils/StringUtils";
+import {RestService} from "./rest.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
-  constructor(private httpClient: HttpClient) {
+  constructor(private restService: RestService) {
   }
 
   getBanners(): Banner[] {
@@ -35,8 +34,8 @@ export class MovieService {
     let requestURL: string = this.buildRequestMovieUrl(type);
     this.callRestRequestGetMovies(requestURL).subscribe(data => {
       data.results.forEach(function (item) {
-        if (item.title.length > 15) {
-          item.title = item.title.substring(0, 14) + "...";
+        if (item.title.length > 50) {
+          item.title = item.title.substring(0, 40) + "...";
         }
         let movie: Movie = {
           title: item.title,
@@ -51,26 +50,7 @@ export class MovieService {
   }
 
   private callRestRequestGetMovies(url: string): Observable<any> {
-    return this.httpClient.get<any>(url).pipe(
-      map(this.extractData),
-      catchError(this.handleError));
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    return throwError(
-      'Something bad happened; please try again later.');
-  }
-
-  private extractData(res: Response): any {
-    const body = res;
-    return body || {};
+    return this.restService.callGetRequest(url);
   }
 
   private buildRequestMovieUrl(movieType: string): string {

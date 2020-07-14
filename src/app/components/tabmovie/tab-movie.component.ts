@@ -11,33 +11,35 @@ import {GenreService} from "../../services/genre.service";
   styleUrls: ['./tab-movie.component.css']
 })
 export class TabMovieComponent implements OnInit {
-
-  movies: Movie[] = [];
+  popularMovies: Movie[] = [];
+  topRatedMovies: Movie[] = [];
+  upcomingMovies: Movie[] = [];
   genres: Genre[] = [];
 
   constructor(private filmService: MovieService, private genreService: GenreService) {
   }
 
   ngOnInit(): void {
-    this.loadMoviesByType(CONSTANT.MOVIE_TYPE_POPULAR);
+    console.log("init tab-movie");
+    this.popularMovies = this.loadMoviesByType(CONSTANT.MOVIE_TYPE_POPULAR);
     this.genres = this.genreService.getAllGenres();
   }
 
-  loadMoviesByType(type: string) {
-    this.movies = this.filmService.getMovies(type);
+  loadMoviesByType(type: string): Movie[] {
+    return this.filmService.getMovies(type);
   }
 
   onClick($event: number) {
     console.log($event.toLocaleString())
     switch ($event) {
       case 0:
-        this.loadMoviesByType(CONSTANT.MOVIE_TYPE_POPULAR);
+        this.popularMovies = this.loadMoviesByType(CONSTANT.MOVIE_TYPE_POPULAR);
         break;
       case 1:
-        this.loadMoviesByType(CONSTANT.MOVIE_TYPE_TOP_RATED);
+        this.topRatedMovies = this.loadMoviesByType(CONSTANT.MOVIE_TYPE_TOP_RATED);
         break;
       case 2:
-        this.loadMoviesByType(CONSTANT.MOVIE_TYPE_UPCOMING);
+        this.upcomingMovies = this.loadMoviesByType(CONSTANT.MOVIE_TYPE_UPCOMING);
         break;
     }
   }

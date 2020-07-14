@@ -1,15 +1,15 @@
 <div>
-  <mat-tab-group animationDuration="2000ms" style="margin: 20px" (selectedIndexChange)="onClick($event)">
+  <mat-tab-group animationDuration="2000ms" (selectedIndexChange)="onClick($event)">
     <mat-tab label="Popular">
-      <app-grid-movie [movies]="movies">
+      <app-grid-movie [movies]="popularMovies">
       </app-grid-movie>
     </mat-tab>
     <mat-tab label="Top Rated">
-      <app-grid-movie [movies]="movies">
+      <app-grid-movie [movies]="topRatedMovies">
       </app-grid-movie>
     </mat-tab>
     <mat-tab label="Upcoming">
-      <app-grid-movie [movies]="movies">
+      <app-grid-movie [movies]="upcomingMovies">
       </app-grid-movie>
     </mat-tab>
   </mat-tab-group>
