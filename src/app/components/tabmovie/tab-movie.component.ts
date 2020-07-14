@@ -19,7 +19,7 @@ export class TabMovieComponent implements OnInit {
     this.loadMoviesByType(CONSTANT.MOVIE_TYPE_POPULAR);
   }
 
-  loadMoviesByType(type: String) {
+  loadMoviesByType(type: string) {
     this.filmService.getMovies(type).subscribe(movies => this.movies = movies);
   }
 

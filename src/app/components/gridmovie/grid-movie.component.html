@@ -1,13 +1,12 @@
 <div>
-  <mat-grid-list cols="6" rowHeight="500px" style="margin-top: 50px">
+  <mat-grid-list cols="5" rowHeight="600px" style="margin-top: 50px">
     <mat-grid-tile
       *ngFor="let movie of movies"
       [colspan]="1"
       [rowspan]="1">
       <div style="margin-top: 0px; padding: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
         <img src="{{movie.poster_path}}" width="100%" height="100%"/>
-        <p style="font-weight: bold">{{movie.title}}</p>
-        <p style="font-weight: bold">Vote: {{movie.vote_average}}</p>
+        <p style="font-weight: bold">{{movie.title}} - Vote:{{movie.vote_average}}</p>
       </div>
     </mat-grid-tile>
   </mat-grid-list>

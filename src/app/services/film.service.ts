@@ -5,27 +5,24 @@ import {Observable, of, throwError} from "rxjs";
 import {catchError, map} from "rxjs/operators";
 import {Movie} from "../models/movie";
 import {CONSTANT} from "../core/constant";
+import {FormatString} from "../utils/StringUtils";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilmService {
-  private nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=a7b3c9975791294647265c71224a88ad&language=en-US&page=1";
-  private popularUrl = "https://api.themoviedb.org/3/movie/popular?api_key=a7b3c9975791294647265c71224a88ad&language=en-US&page=1";
-  private topRatedUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key=a7b3c9975791294647265c71224a88ad&language=en-US&page=1";
-  private upcomingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=a7b3c9975791294647265c71224a88ad&language=en-US&page=1";
   constructor(private httpClient: HttpClient) {
   }
 
   getBanners(): Observable<Banner[]> {
     let banners: Banner[] = [];
-    this.getNowPlayingMovies().subscribe(data => {
+    let requestURL: string = this.buildRequestUrl(CONSTANT.MOVIE_TYPE_NOW_PLAYING);
+    this.callRestRequestGetMovies(requestURL).subscribe(data => {
       data.results.forEach(function (item) {
-        let imgUrl = "https://image.tmdb.org/t/p/original";
         let banner: Banner = {
           title: item.original_title,
           description: item.overview,
-          posterUrl: imgUrl + item.backdrop_path
+          posterUrl: CONSTANT.BASE_IMAGE_URL + item.backdrop_path
         }
         banners.push(banner)
       })
@@ -33,77 +30,31 @@ export class FilmService {
     return of(banners);
   }
 
-  getMovies(type: String): Observable<Movie[]> {
+  getMovies(type: string): Observable<Movie[]> {
     let movies: Movie[] = [];
-    if(type === CONSTANT.MOVIE_TYPE_POPULAR) {
-      this.getPopularMovies().subscribe(data => {
-        data.results.forEach(function (item) {
-          let imgUrl = "https://image.tmdb.org/t/p/original";
-          let movie: Movie = {
-            title: item.title,
-            overview: item.overview,
-            poster_path: imgUrl + item.poster_path,
-            vote_average: item.vote_average,
-          }
-          movies.push(movie);
-        })
-      });
-    }
-    if(type === CONSTANT.MOVIE_TYPE_TOP_RATED) {
-      this.getTopRatedMovies().subscribe(data => {
-        data.results.forEach(function (item) {
-          let imgUrl = "https://image.tmdb.org/t/p/original";
-          let movie: Movie = {
-            title: item.title,
-            overview: item.overview,
-            poster_path: imgUrl + item.poster_path,
-            vote_average: item.vote_average,
-          }
-          movies.push(movie);
-        })
-      });
-    }
-    if(type === CONSTANT.MOVIE_TYPE_UPCOMING) {
-      this.getUpcomingMovies().subscribe(data => {
-        data.results.forEach(function (item) {
-          let imgUrl = "https://image.tmdb.org/t/p/original";
-          let movie: Movie = {
-            title: item.title,
-            overview: item.overview,
-            poster_path: imgUrl + item.poster_path,
-            vote_average: item.vote_average,
-          }
-          movies.push(movie);
-        })
-      });
-    }
+    let requestURL: string = this.buildRequestUrl(type);
+    this.callRestRequestGetMovies(requestURL).subscribe(data => {
+      data.results.forEach(function (item) {
+        if (item.title.length > 15) {
+          item.title = item.title.substring(0, 14) + "...";
+        }
+        let movie: Movie = {
+          title: item.title,
+          overview: item.overview,
+          poster_path: CONSTANT.BASE_IMAGE_URL + item.poster_path,
+          vote_average: item.vote_average,
+        }
+        movies.push(movie);
+      })
+    });
     return of(movies);
   }
 
-  private getNowPlayingMovies(): Observable<any> {
-    return this.httpClient.get<any>(this.nowPlayingUrl).pipe(
+  private callRestRequestGetMovies(url: string): Observable<any> {
+    return this.httpClient.get<any>(url).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
-
-  private getPopularMovies(): Observable<any> {
-    return this.httpClient.get<any>(this.popularUrl).pipe(
-      map(this.extractData),
-      catchError(this.handleError));
-  }
-
-  private getTopRatedMovies(): Observable<any> {
-    return this.httpClient.get<any>(this.topRatedUrl).pipe(
-      map(this.extractData),
-      catchError(this.handleError));
-  }
-
-  private getUpcomingMovies(): Observable<any> {
-    return this.httpClient.get<any>(this.upcomingUrl).pipe(
-      map(this.extractData),
-      catchError(this.handleError));
-  }
-
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
@@ -120,5 +71,9 @@ export class FilmService {
   private extractData(res: Response): any {
     const body = res;
     return body || {};
+  }
+
+  private buildRequestUrl(movieType: string): string {
+    return FormatString(CONSTANT.BASE_URL, movieType, CONSTANT.API_KEY);
   }
 }
