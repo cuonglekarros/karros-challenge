@@ -1,4 +1,5 @@
 export const CONSTANT = Object.freeze({
+  PAGE_NAME: "THEMOVIEBOX",
   MOVIE_TYPE_POPULAR: "popular",
   MOVIE_TYPE_TOP_RATED: "top_rated",
   MOVIE_TYPE_UPCOMING: "upcoming",

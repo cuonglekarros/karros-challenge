@@ -1,3 +1,15 @@
-img {
+.img-banner {
   width: 100%;
+}
+
+.div-page-name {
+  position: absolute;
+  top: 60px;
+  left: 60px
+}
+
+.div-search-login-sign-up {
+  position: absolute;
+  top: 60px;
+  right: 220px
 }

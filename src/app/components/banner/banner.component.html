@@ -1,11 +1,21 @@
-<ngb-carousel interval="2000">
-  <ng-template ngbSlide *ngFor="let banner of banners">
-    <div class="picsum-img-wrapper">
-      <img src="{{banner.posterUrl}}" alt="img slide">
-    </div>
-    <div class="carousel-caption">
-      <h3>{{banner.title}}</h3>
-      <p>{{banner.description}}</p>
-    </div>
-  </ng-template>
-</ngb-carousel>
+<div>
+  <ngb-carousel interval="2000">
+    <ng-template ngbSlide *ngFor="let banner of banners">
+      <div class="picsum-img-wrapper">
+        <img class="img-banner" src="{{banner.posterUrl}}" alt="img slide">
+      </div>
+      <div class="carousel-caption">
+        <h3>{{banner.title}}</h3>
+        <p>{{banner.description}}</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  <div class="div-page-name">
+    <h2 style="color: #f8f8f8">{{pageName}}</h2>
+  </div>
+  <div class="div-search-login-sign-up">
+    <img src="../../../assets/search-icon.png" height="32px" width="32px" style="margin-right: 10px"/>
+    <button mat-flat-button color="warn" style="margin-right: 10px">LOG IN</button>
+    <button mat-flat-button color="warn">SIGN UP</button>
+  </div>
+</div>
